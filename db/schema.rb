@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_17_151956) do
+ActiveRecord::Schema.define(version: 2020_06_22_070023) do
 
   create_table "game_performances", force: :cascade do |t|
     t.integer "player_id", null: false
@@ -23,11 +23,12 @@ ActiveRecord::Schema.define(version: 2020_06_17_151956) do
   end
 
   create_table "indicators", force: :cascade do |t|
-    t.string "indicator_name"
+    t.string "indicator_name", null: false
+    t.index ["indicator_name"], name: "index_indicators_on_indicator_name", unique: true
   end
 
   create_table "players", force: :cascade do |t|
-    t.string "player_name"
+    t.string "player_name", null: false
     t.integer "team_id", null: false
     t.index ["team_id"], name: "index_players_on_team_id"
   end
@@ -43,7 +44,8 @@ ActiveRecord::Schema.define(version: 2020_06_17_151956) do
   end
 
   create_table "teams", force: :cascade do |t|
-    t.string "team_name"
+    t.string "team_name", null: false
+    t.index ["team_name"], name: "index_teams_on_team_name", unique: true
   end
 
   add_foreign_key "game_performances", "indicators"
